@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "printer_rust",
+    "adder_rust"
+]
