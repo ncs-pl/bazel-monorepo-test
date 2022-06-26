@@ -14,5 +14,5 @@ rust_test(
     name = "printer_rust_test",
     crate = ":printer_rust",
     proc_macro_deps = all_crate_deps(proc_macro = True),
-    deps = all_crate_deps(noprmal = True),
+    deps = all_crate_deps(normal = True),
 )
