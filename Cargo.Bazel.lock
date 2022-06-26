@@ -1,5 +1,5 @@
 {
-  "checksum": "106ba12d92714be82b022dc8242e07fe5b611df235924762a0e2cdfb1bfd6f50",
+  "checksum": "8fdaf86068c3024f45815395e0e070e9e757bb42e31146665a81e6296a919665",
   "crates": {
     "adder_rust 0.1.0": {
       "name": "adder_rust",
@@ -4833,44 +4833,28 @@
     "aarch64-uwp-windows-msvc": [],
     "cfg(all(any(target_arch = \"x86_64\", target_arch = \"aarch64\"), target_os = \"hermit\"))": [],
     "cfg(not(windows))": [
-      "aarch64-apple-darwin",
-      "aarch64-apple-ios",
-      "aarch64-apple-ios-sim",
-      "aarch64-linux-android",
       "aarch64-unknown-linux-gnu",
       "wasm32-unknown-unknown",
       "wasm32-wasi",
-      "x86_64-apple-darwin",
       "x86_64-unknown-linux-gnu"
     ],
     "cfg(target_os = \"redox\")": [],
     "cfg(target_os = \"wasi\")": [
       "wasm32-wasi"
     ],
-    "cfg(target_os = \"windows\")": [
-      "x86_64-pc-windows-msvc"
-    ],
+    "cfg(target_os = \"windows\")": [],
     "cfg(tracing_unstable)": [],
     "cfg(unix)": [
-      "aarch64-apple-darwin",
-      "aarch64-apple-ios",
-      "aarch64-apple-ios-sim",
-      "aarch64-linux-android",
       "aarch64-unknown-linux-gnu",
-      "x86_64-apple-darwin",
       "x86_64-unknown-linux-gnu"
     ],
-    "cfg(windows)": [
-      "x86_64-pc-windows-msvc"
-    ],
+    "cfg(windows)": [],
     "i686-pc-windows-gnu": [],
     "i686-pc-windows-msvc": [],
     "i686-uwp-windows-gnu": [],
     "i686-uwp-windows-msvc": [],
     "x86_64-pc-windows-gnu": [],
-    "x86_64-pc-windows-msvc": [
-      "x86_64-pc-windows-msvc"
-    ],
+    "x86_64-pc-windows-msvc": [],
     "x86_64-uwp-windows-gnu": [],
     "x86_64-uwp-windows-msvc": []
   }
