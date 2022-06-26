@@ -1,3 +1,6 @@
+use rand::{Rng, SeedableRng};
+use rand::rngs::SmallRng;
+
 /// Sum the two given numbers
 pub fn add(left: usize, right: usize) -> usize {
     left + right
@@ -5,7 +8,8 @@ pub fn add(left: usize, right: usize) -> usize {
 
 /// Sum two random numbers
 pub fn add_two_random() -> usize {
-    add(rand::random(), rand::random())
+    let mut generator: SmallRng = SmallRng::from_entropy();
+    add(generator.gen_range(1..500), generator.gen_range(1..500))
 }
 
 #[cfg(test)]
