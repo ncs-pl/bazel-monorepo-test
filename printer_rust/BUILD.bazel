@@ -1,0 +1,18 @@
+load("@crate_index_cargo_workspace//:defs.bzl", "aliases", "all_crate_deps")
+load("@rules_rust//rust:defs.bzl", "rust_library", "rust_test")
+
+package(default_visibility = ["//visibility:public"])
+
+rust_library(
+    name = "printer_rust",
+    srcs = glob(["**/*.rs"]),
+    proc_macro_deps = all_crate_deps(proc_macro = True),
+    deps = all_crate_deps(normal = True),
+)
+
+rust_test(
+    name = "printer_rust_test",
+    crate = ":printer_rust",
+    proc_macro_deps = all_crate_deps(proc_macro = True),
+    deps = all_crate_deps(noprmal = True),
+)

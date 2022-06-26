@@ -1,0 +1,56 @@
+workspace(name = "n1c00o_bazel_monorepo_test")
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# Rust 0.6.0
+http_archive(
+    name = "rules_rust",
+    sha256 = "872b04538ca20dad94791c348623f079ba93daf274c1d57ae6bfe0930ec77f0d",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_rust/releases/download/0.6.0/rules_rust-v0.6.0.tar.gz",
+        "https://github.com/bazelbuild/rules_rust/releases/download/0.6.0/rules_rust-v0.6.0.tar.gz",
+    ],
+)
+
+load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
+
+rules_rust_dependencies()
+
+rust_register_toolchains(
+    edition = "2021",
+)
+
+load("@rules_rust//crate_universe:repositories.bzl", "crate_universe_dependencies")
+
+crate_universe_dependencies()
+
+load("@rules_rust//crate_universe:crates_deps.bzl", "crate_repositories")
+
+crate_repositories()
+
+load("@rules_rust//crate_universe:defs.bzl", "crates_repository")
+
+crates_repository(
+    name = "crate_index_cargo_workspace",
+    cargo_config = "//:.cargo/config.toml",
+    lockfile = "//:Cargo.Bazel.lock",
+    manifests = [
+        "//:Cargo.toml",
+        "//web_server_rust:Cargo.toml",
+        "//adder_rust:Cargo.toml",
+        "//printer_rust:Cargo.toml",
+    ],
+    supported_platform_triples = [
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu",
+        "wasm32-unknown-unknown",
+        "wasm32-wasi",
+    ],
+)
+
+load(
+    "@crate_index_cargo_workspace//:defs.bzl",
+    cargo_workspace_crate_repositories = "crate_repositories",
+)
+
+cargo_workspace_crate_repositories()

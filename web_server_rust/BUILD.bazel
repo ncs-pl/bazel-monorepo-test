@@ -1,0 +1,15 @@
+load("@crate_index_cargo_workspace//:defs.bzl", "aliases", "all_crate_deps")
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+rust_binary(
+    name = "web_server_rust",
+    srcs = glob(["**/*.rs"]),
+    edition = "2021",
+    proc_macro_deps = all_crate_deps(proc_macro = True),
+    deps = [
+        "//printer_rust",
+        "//adder_rust",
+    ] + all_crate_deps(normal = True),
+)

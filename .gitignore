@@ -1,3 +1,11 @@
+# ides
 .clwb
 
+# bazel
+bazel-bazel-monorepo-test
+bazel-bin
+bazel-out
+bazel-testlogs
+
+# rust
 /target/
