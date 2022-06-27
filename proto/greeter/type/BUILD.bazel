@@ -1,0 +1,18 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//rust:defs.bzl", "rust_proto_library")
+
+package(default_visibility = ["//visibility:public"])
+
+proto_library(
+    name = "greeter_type_proto",
+    srcs = [
+        "greeting.proto",
+    ],
+)
+
+rust_proto_library(
+    name = "greeter_type_rust_proto",
+    protos = [
+        ":greeter_type_proto",
+    ],
+)

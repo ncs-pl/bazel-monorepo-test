@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package proto.greeter.v1;
+
+import "google/protobuf/empty.proto";
+import "proto/greeter/type/greeting.proto";
+
+// Greets people according to their name
+service Greeter {
+  // Greet someone
+  rpc GetGreeting(GetGreetingRequest) returns (proto.greeter.type.Greeting);
+}
+
+// Request a greeting
+message GetGreetingRequest {
+  // name of the person to greet
+  string name = 1;
+  // age of the person to greet
+  uint64 age = 2;
+  // nothing
+  google.protobuf.Empty nothing = 3;
+}
+

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package proto.greeter.type;
+
+// A greeting
+message Greeting {
+  // the greeting message
+  string message = 1;
+}

@@ -2,7 +2,11 @@ workspace(name = "n1c00o_bazel_monorepo_test")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# Rust 0.6.0
+# ---
+# TOOLCHAIN: @rules_rust
+# VERSION: 0.6.0
+# LINK: https://github.com/bazelbuild/rules_rust
+# ---
 http_archive(
     name = "rules_rust",
     sha256 = "872b04538ca20dad94791c348623f079ba93daf274c1d57ae6bfe0930ec77f0d",
@@ -16,9 +20,7 @@ load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_regi
 
 rules_rust_dependencies()
 
-rust_register_toolchains(
-    edition = "2021",
-)
+rust_register_toolchains(edition = "2021")
 
 load("@rules_rust//crate_universe:repositories.bzl", "crate_universe_dependencies")
 
@@ -54,3 +56,53 @@ load(
 )
 
 cargo_workspace_crate_repositories()
+
+# ---
+# TOOLCHAIN: @rules_proto
+# VERSION: 4.1.1
+# LINK: https://github.com/bazelbuild/rules_proto
+# ---
+http_archive(
+    name = "rules_proto",
+    sha256 = "e017528fd1c91c5a33f15493e3a398181a9e821a804eb7ff5acdd1d2d6c2b18d",
+    strip_prefix = "rules_proto-4.0.0-3.20.0",
+    urls = [
+        "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.20.0.tar.gz",
+    ],
+)
+
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+
+rules_proto_dependencies()
+
+rules_proto_toolchains()
+
+# ---
+# TOOLCHAIN: @rules_proto_grpc
+# VERSION: 4.1.1
+# LINK: https://github.com/rules-proto-grpc/rules_proto_grpc
+# ---
+http_archive(
+    name = "rules_proto_grpc",
+    sha256 = "507e38c8d95c7efa4f3b1c0595a8e8f139c885cb41a76cab7e20e4e67ae87731",
+    strip_prefix = "rules_proto_grpc-4.1.1",
+    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/4.1.1.tar.gz"],
+)
+
+load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
+
+rules_proto_grpc_toolchains()
+
+rules_proto_grpc_repos()
+
+# languages support
+# lang: rust -> https://rules-proto-grpc.com/en/latest/lang/rust.html
+load("@rules_proto_grpc//rust:repositories.bzl", rules_proto_grpc_rust_repos = "rust_repos")
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+load("@rules_rust//rust:repositories.bzl", "rust_repositories")
+
+rules_proto_grpc_rust_repos()
+
+grpc_deps()
+
+rust_repositories()
