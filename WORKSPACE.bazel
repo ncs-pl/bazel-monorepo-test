@@ -7,6 +7,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # VERSION: 0.6.0
 # LINK: https://github.com/bazelbuild/rules_rust
 # ---
+
 http_archive(
     name = "rules_rust",
     sha256 = "872b04538ca20dad94791c348623f079ba93daf274c1d57ae6bfe0930ec77f0d",
@@ -76,6 +77,26 @@ load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_
 rules_proto_dependencies()
 
 rules_proto_toolchains()
+
+"""
+# We currently use a fork of @rules_proto_grpc from titanous (https://github.com/titanous/)  which uses `prost` and
+# `tonic` for Protobuf and gRPC in Rust since they are maintained and production-ready.
+# As of now, the merge request is a Draft.
+# TODO: when rhe MR is merged, use official repo (release or commit hash)
+# ---
+# TOOLCHAIN: @rules_proto_grpc (fork)
+# VERSION: 4.1.1 fork (draft) https://github.com/rules-proto-grpc/rules_proto_grpc/pull/202
+# LINK: https://github.com/titanous/rules_proto_grpc
+# ---
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name = "rules_proto_grpc",
+    commit = "2de961f5f44bdb62d3a35de828c36e53ed9ddaf6",
+    remote = "https://github.com/titanous/rules_proto_grpc.git",
+    shallow_since = "1655402640 +0000",
+)
+"""
 
 # ---
 # TOOLCHAIN: @rules_proto_grpc
