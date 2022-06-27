@@ -1,5 +1,5 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_proto_grpc//rust:defs.bzl", "rust_grpc_library")
+load("@rules_rust//proto:proto.bzl", "rust_grpc_library")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -16,7 +16,7 @@ proto_library(
 
 rust_grpc_library(
     name = "greeter_v1_rust_grpc",
-    protos = [
+    deps = [
         ":greeter_v1_proto",
         "//proto/greeter/type:greeter_type_proto",
     ],
